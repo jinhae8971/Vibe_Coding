@@ -1,0 +1,4 @@
+description: |
+  Basic AI prompt for market sentiment analysis.
+  Use market data to determine long or short bias.
+  Return "LONG", "SHORT", or "HOLD" only.

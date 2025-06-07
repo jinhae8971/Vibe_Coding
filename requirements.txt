@@ -1,0 +1,7 @@
+python-dotenv
+PyYAML
+openai
+pandas
+requests
+streamlit
+pytest
