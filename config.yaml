@@ -1,0 +1,76 @@
+# AutoML 시스템 설정 파일
+# Auto ML System Configuration
+
+# 기본 설정
+random_state: 42
+test_size: 0.2
+cv_folds: 5
+log_level: 'INFO'
+
+# 하이퍼파라미터 최적화 설정
+optimization_trials: 50  # Optuna 최적화 시도 횟수
+
+# 데이터 합성 방법 설정
+synthesis_methods:
+  - 'smote'          # SMOTE 오버샘플링
+  - 'adasyn'         # ADASYN 오버샘플링  
+  - 'borderline'     # BorderlineSMOTE
+  - 'ctgan'          # CTGAN (생성적 적대 신경망)
+  - 'copulas'        # Gaussian Copula
+
+# 모델 설정
+models:
+  classification:    # 분류용 모델들
+    - 'rf'           # Random Forest
+    - 'xgb'          # XGBoost
+    - 'lgb'          # LightGBM
+    - 'catboost'     # CatBoost
+    - 'svm'          # Support Vector Machine
+    
+  regression:        # 회귀용 모델들
+    - 'rf'           # Random Forest
+    - 'xgb'          # XGBoost
+    - 'lgb'          # LightGBM
+    - 'catboost'     # CatBoost
+    - 'svr'          # Support Vector Regression
+
+# 데이터 전처리 설정
+preprocessing:
+  missing_threshold: 0.5        # 결측치 50% 이상인 컬럼 제거
+  feature_selection_threshold: 50  # 50개 이상 특성일 때 특성 선택 수행
+  encoding:
+    high_cardinality_threshold: 10  # 10개 이상 범주는 Label Encoding
+
+# 평가 지표 설정
+evaluation:
+  classification:
+    primary_metric: 'f1_weighted'
+    additional_metrics:
+      - 'accuracy'
+      - 'precision_weighted'
+      - 'recall_weighted'
+      - 'roc_auc'  # binary classification만
+      
+  regression:
+    primary_metric: 'neg_mean_squared_error'
+    additional_metrics:
+      - 'mean_absolute_error'
+      - 'r2'
+
+# 시각화 설정
+visualization:
+  generate_plots: true
+  plot_formats: ['png']
+  figure_size: [10, 8]
+  dpi: 300
+
+# 출력 설정
+output:
+  save_models: true          # 훈련된 모델 저장 여부
+  save_predictions: true     # 예측 결과 저장 여부
+  save_feature_importance: true  # 특성 중요도 저장 여부
+  
+# 성능 설정
+performance:
+  n_jobs: -1                 # 병렬 처리 코어 수 (-1: 모든 코어 사용)
+  memory_limit: '4GB'        # 메모리 제한
